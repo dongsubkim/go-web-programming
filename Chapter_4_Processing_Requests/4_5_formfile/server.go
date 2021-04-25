@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ func process(w http.ResponseWriter, r *http.Request) {
 	// file, err := fileHeader.Open()
 	file, _, err := r.FormFile("uploaded")
 	if err == nil {
-		data, err := ioutil.ReadAll(file)
+		data, err := io.ReadAll(file)
 		if err == nil {
 			fmt.Fprintln(w, string(data))
 		}
